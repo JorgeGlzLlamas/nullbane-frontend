@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historia - Nullbane</title>
+    <link rel="icon" type="image/png" href="images/icono.png">
+    <meta name="theme-color" content="#1A261A"/>
+    
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
+    
+    <style>
+        /* --- Paleta de Colores por Defecto (DARK/Verde) --- */
+        :root {
+            --color-primary: #D5F2D0;
+            --color-secondary: #1A261A;
+            --color-accent: #9CA697;
+            --color-card: #2D402C;
+            --color-darker: #0D0D0D;
+            --color-success: #22c55e;
+            --bs-body-bg: var(--color-secondary);
+            --bs-body-color: var(--color-primary);
+            --color-danger: #dc3545;
+            --color-warning: #ffc107;
+        }
+
+        /* --- Paleta de Colores Modo Claro (LIGHT/Azul con Fondo Blanco) --- */
+        .theme-light {
+            --color-primary: #162740;
+            --color-secondary: #FFFFFF;
+            --color-accent: #3E5373;
+            --color-card: #F4F4F4;
+            --color-darker: #162740;
+            --color-success: #22c55e;
+            --bs-body-bg: var(--color-secondary);
+            --bs-body-color: var(--color-primary);
+            --color-danger: #dc3545;
+            --color-warning: #ffc107;
+        }
+
+        body {
+            background-color: var(--bs-body-bg);
+            color: var(--bs-body-color);
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: var(--color-darker) !important;
+            border-bottom: 2px solid var(--color-primary);
+            transition: background-color 0.3s, border-bottom 0.3s;
+        }
+        .navbar-brand {
+            color: var(--color-primary) !important;
+            font-weight: bold;
+        }
+
+        .theme-light .navbar {
+            background-color: var(--color-secondary) !important;
+            border-bottom: 2px solid var(--color-accent);
+        }
+        .theme-light .navbar-brand {
+            color: var(--color-darker) !important;
+        }
+
+        /* Banner Hero */
+        .banner-hero {
+            position: relative;
+            height: 60vh;
+            min-height: 400px;
+            overflow: hidden;
+            border-bottom: 4px solid var(--color-primary);
+        }
+        .banner-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.6);
+        }
+        .banner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(13,13,13,0.8));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .theme-light .banner-hero {
+            border-bottom: 4px solid var(--color-accent);
+        }
+
+        /* Contenido de Historia */
+        .story-content {
+            background-color: var(--color-secondary);
+            padding: 4rem 0;
+        }
+        .theme-light .story-content {
+            background-color: var(--color-secondary);
+        }
+
+        .story-section {
+            margin-bottom: 4rem;
+        }
+
+        .story-title {
+            color: var(--color-primary);
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 3px solid var(--color-accent);
+        }
+
+        .story-text {
+            color: var(--color-accent);
+            line-height: 1.8;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .story-highlight {
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        .story-quote {
+            background-color: var(--color-card);
+            border-left: 4px solid var(--color-primary);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: var(--color-primary);
+        }
+
+        .theme-light .story-quote {
+            background-color: var(--color-card);
+            border-left: 4px solid var(--color-accent);
+            color: var(--color-darker);
+        }
+
+        /* Card de Personaje */
+        .character-card {
+            background-color: var(--color-card);
+            border: 2px solid var(--color-accent);
+            border-radius: 0.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .character-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(213, 242, 208, 0.15);
+        }
+        .theme-light .character-card {
+            background-color: var(--color-card);
+            border-color: var(--color-accent);
+        }
+        .theme-light .character-card:hover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--color-darker);
+            border-top: 1px solid var(--color-accent);
+            padding: 2rem 0;
+        }
+        .theme-light footer {
+            background-color: var(--color-darker);
+            color: var(--color-secondary) !important;
+        }
+
+        /* Botón de regreso */
+        .btn-back {
+            background-color: var(--color-primary);
+            color: var(--color-darker);
+            border: 2px solid var(--color-primary);
+            font-weight: bold;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+        }
+        .btn-back:hover {
+            background-color: var(--color-accent);
+            color: var(--color-darker);
+            border-color: var(--color-accent);
+            transform: translateY(-2px);
+        }
+        .theme-light .btn-back {
+            background-color: var(--color-primary);
+            color: var(--color-secondary);
+            border-color: var(--color-primary);
+        }
+        .theme-light .btn-back:hover {
+            background-color: var(--color-accent);
+            color: var(--color-secondary);
+            border-color: var(--color-accent);
+        }
+
+        /* Divider decorativo */
+        .divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--color-accent), transparent);
+            margin: 3rem 0;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar sticky-top">
+        <div class="container-fluid container">
+            <a class="navbar-brand fs-3" href="index.html">NULLBANE</a>
+            
+            <div class="d-flex">
+                <button id="lang-toggle" class="btn p-2 me-2 fw-bold" type="button" aria-label="Change language" 
+                        style="color: var(--color-primary); font-size: 0.9rem;" 
+                        onclick="changeLanguage(localStorage.getItem('nullbane-lang') === 'es' ? 'en' : 'es')">
+                    ES
+                </button>
+
+                <button id="theme-toggle" class="btn p-2" type="button" aria-label="Toggle theme" style="color: var(--color-primary);">
+                    <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="banner-hero">
+        <img src="images/banner_history.jpg" alt="Historia de Nullbane">
+        <div class="banner-overlay">
+            <div class="text-center">
+                <h1 class="display-2 fw-bold text-white mb-3" data-i18n="story.banner.title">Historia de Nullbane</h1>
+                <H2 class="display-4 fw-bold text-white-50" data-i18n="story.banner.subtitle">La Crónica Completa</p>
+            </div>
+        </div>
+    </section>
+
+    <main class="story-content">
+        <div class="container" style="max-width: 900px;">
+            
+            <div class="mb-4">
+                <a href="index.html" class="btn-back" data-i18n="story.back">
+                    ← Volver al Inicio
+                </a>
+            </div>
+
+            <section class="story-section">
+                <h2 class="story-title fs-1" data-i18n="story.chapter1.title">Orígenes: La Era del Silencio</h2>
+
+                <p class="story-text" data-i18n="story.chapter1.text1">
+                    Antes de la existencia de los reinos y los hombres, el universo era un lienzo en blanco de quietud absoluta. 
+                    De este vacío primordial nació Tenebris, la Entidad Silente. A diferencia de otros males, <span class="story-highlight">Tenebris</span> no busca conquistar 
+                    ni destruir por odio; su propósito es consumir toda luz y sonido para devolver la existencia a su estado original de silencio 
+                    eterno.
+                </p>
+
+                <p class="story-text" data-i18n="story.chapter1.text2">
+                    Para contrarrestar esta amenaza cósmica, se fundó la <span class="story-highlight">Orden de Plata</span>, una hermandad de caballeros que no juraba lealtad a 
+                    ningún monarca, sino a la preservación de la vida misma. Construyeron la <span class="story-highlight">Ciudadela Silente</span>, no como una fortaleza militar, 
+                    sino como una prisión arcana sellada para mantener a la entidad dormida. Durante milenios, la Orden vigiló en secreto, mientras 
+                    el mundo exterior olvidaba su propósito.
+                </p>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="story-section">
+                <h2 class="story-title fs-1" data-i18n="story.chapter2.title">El Cataclismo: La Traición de Vorlag</h2>
+                <p class="story-text" data-i18n="story.chapter2.text1">
+                    La prisión de Tenebris era fuerte, pero su influencia era paciente. A través de las grietas del sello, la entidad
+                    susurró promesas de poder prohibido. <span class="story-highlight">Vorlag</span>, uno de los eruditos más brillantes de la Orden, fue seducido por estos susurros.
+                </p>
+
+                <p class="story-text" data-i18n="story.chapter2.text2">
+                    En su arrogancia, Vorlag creyó que poseía el intelecto para dominar el poder del vacío en lugar de simplemente contenerlo. 
+                    Su traición no fue un ataque, sino una implosión: rompió el sello sagrado desde el interior. El resultado fue devastador; 
+                    la corrupción de Tenebris se liberó como una plaga instantánea, aniquilando a la hermandad y transformando a los guardianes y 
+                    criaturas del entorno en monstruosidades retorcidas por la oscuridad.
+                </p>
+                
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="story-section">
+                <h2 class="story-title fs-1" data-i18n="story.chapter3.title">El Presente: La Cruzada del Último Caballero</h2>
+
+                <p class="story-text" data-i18n="story.chapter3.text1">
+                    <span class="story-highlight">Sir Joseph</span>, quien se encontraba en una misión lejana durante el cataclismo, fue el único superviviente. Al regresar, 
+                    encontró la Ciudadela en ruinas y su juramento hecho pedazos. La maldición liberada por Vorlag lo alcanzó, oxidando su 
+                    brillante armadura plateada y convirtiéndola en una carga pesada, un mapa físico de sus fracasos.
+                </p>
+
+                <p class="story-text" data-i18n="story.chapter3.text2">
+                    Ahora, el mundo se desvanece. El camino hacia la Ciudadela está bloqueado por la magia del traidor, y la corrupción se 
+                    expande desde el <span class="story-highlight">Bosque Susurrante.</span> La misión de Joseph es desesperada: debe cazar a su antiguo hermano 
+                    Vorlag en la <span class="story-highlight">Gruta Hundida</span> para purificar su armadura y obtener el poder necesario para ascender a la Ciudadela. Allí, en el trono de la 
+                    oscuridad, deberá enfrentar a Tenebris antes de que el silencio consuma lo último que queda de realidad.
+                </p>
+
+                <div class="text-center">
+                    <a href="index.html" class="btn-back" data-i18n="story.back">
+                        Volver al Inicio
+                    </a>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="py-4 mt-auto dark-bg-light-mode">
+        <div class="container text-center small text-accent">
+            <p class="mb-1" data-i18n="footer.text1">&copy; 2025 Nullbane Games. Un proyecto de la UT de Nayarit. Clasificación B (+12 Años).</p>
+            <p data-i18n="footer.text2">Desarrollado por el Equipo 6 (IDGS-102).</p>
+        </div>
+    </footer>
+
+    <script src="./bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="translations.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const body = document.body;
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = document.getElementById('theme-icon');
+
+            const iconMoon = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+            const iconSun = '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
+
+            let isDarkMode = true;
+            
+            // Cargar el tema guardado desde localStorage
+            const savedTheme = localStorage.getItem('nullbane-theme');
+            if (savedTheme !== null) {
+                isDarkMode = savedTheme === 'dark';
+            }
+            
+            function applyTheme(isDark) {
+                isDarkMode = isDark;
+                // Guardar el tema en localStorage
+                localStorage.setItem('nullbane-theme', isDark ? 'dark' : 'light');
+                
+                if (isDark) {
+                    body.classList.remove('theme-light');
+                    themeIcon.innerHTML = iconMoon;
+                    themeToggle.style.color = 'var(--color-primary)';
+                } else {
+                    body.classList.add('theme-light');
+                    themeIcon.innerHTML = iconSun;
+                    themeToggle.style.color = 'var(--color-darker)';
+                }
+            }
+
+            themeToggle.addEventListener('click', () => {
+                applyTheme(!isDarkMode);
+            });
+
+            applyTheme(isDarkMode);
+        });
+    </script>
+    
+</body>
+</html>
